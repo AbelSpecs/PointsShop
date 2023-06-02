@@ -1,0 +1,62 @@
+.card{
+  position: relative;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+}
+
+.card::before{
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transition: all 0.5s ease-in-out;
+  z-index: 1;
+}
+
+.card:hover::before{
+  background-color: #55cce3;
+  opacity: 0.9;
+  z-index: 1;
+
+}
+
+.cardFooterText{
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.cardDivider{
+  width: 80%;
+  margin: 0 auto;
+  bottom: 10px;
+}
+
+.coin{
+  display: block;
+  position: absolute;
+  z-index: 1;
+  top: 102px;
+  left: 170px;
+}
+
+.cardCost{
+  display: none;
+  position: absolute;
+  z-index: 1;
+  top: 95px;
+  margin-right: 20px;
+}
+
+.cardButton{
+  display: none;
+  background-color: white;
+  border-color: transparent;
+  color: gray;
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+}
+
+

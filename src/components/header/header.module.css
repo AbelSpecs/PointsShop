@@ -1,0 +1,6 @@
+.headerImg{
+  height: 300px;
+  width: auto;
+  background: url('../../assets/header.png') no-repeat;
+  background-size: cover;
+}
