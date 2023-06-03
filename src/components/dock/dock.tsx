@@ -6,6 +6,7 @@ import { Grid } from '@nextui-org/react';
 import AeroCard from '../aero-card/aero-card';
 import { Product } from '~/types/product';
 import apiProducts from '~/services/api.products';
+import Filter from '../filter/filter';
 
 
 interface DockProps {}
@@ -30,7 +31,8 @@ const Dock: FC<DockProps> = () => {
   return (
     <DockWrapper data-testid="Dock">
       <Header/>
-      <Grid.Container gap={2} justify="center" className={styles.dock}>
+      <Grid.Container gap={2} justify="center">
+      <Filter></Filter>
         {
           products?.map((product, i) => {
             return (

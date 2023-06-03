@@ -1,3 +1,7 @@
 .dock{
   margin-top: 10%;
 }
+
+div#gridAeroCard.cardGrid{
+  flex-basis: unset;
+}
