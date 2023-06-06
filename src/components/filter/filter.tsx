@@ -23,8 +23,9 @@ const Filter: FC<FilterProps> = () => (
         <Button auto rounded flat className={styles.cardButton}>
           Highest Price
         </Button>
-        <Image src={arowRight} containerCss={{width: '40px', margin: 0}}/>
+        <Image src={arowRight} containerCss={{width: '40px', margin: 0, position: 'absolute', right: '40px'}}/>
       </Card.Body>
+      <Card.Divider className={styles.bottomDivider}/>
      </Card>
  </FilterWrapper>
 );

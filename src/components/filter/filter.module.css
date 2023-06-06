@@ -2,11 +2,14 @@
   justify-content: center;
   background-color: white;
   max-width: 100%;
+  position: relative;
+  align-items: center;
 }
 
 .cardBody{
   align-items: center;
   flex-direction: row;
+  position: relative;
 }
 
 .cardDivider{
@@ -19,5 +22,11 @@
   margin-right: 20px;
   color: rgb(172 170 170);
   background-color: rgb(237 237 237);
+}
+
+.bottomDivider{
+  position: absolute;
+  bottom: 10px;
+  width: 94%;
 }
 

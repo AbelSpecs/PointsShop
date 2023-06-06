@@ -2,6 +2,15 @@
   margin-top: 10%;
 }
 
+.gridContainer{
+  width: 90%;
+  margin: 0 auto;
+}
+
+.grid{
+  margin-top: 30px;
+}
+
 div#gridAeroCard.cardGrid{
   flex-basis: unset;
 }
