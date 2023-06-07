@@ -4,10 +4,6 @@ import { HeaderWrapper } from './header.styled';
 import { Text, Image } from "@nextui-org/react";
 import header from '../../assets/header.png';
 
-
-
-
-
 interface HeaderProps {}
 
 const Header: FC<HeaderProps> = () => (

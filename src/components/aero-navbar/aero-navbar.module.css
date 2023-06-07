@@ -1,3 +1,25 @@
 nav.aeroNavbar{
-  justify-content: flex-start;
+  justify-content: center;
+}
+
+.userInfo{
+  gap: 1rem;
+}
+
+div.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-direction: row;
+  border-radius: 16px;
+  padding: 0px 11px;
+  height: 40px;
+  background: rgb(237 237 237);
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+}
+
+.name{
+  width: 100%;
 }

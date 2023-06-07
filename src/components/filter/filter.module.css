@@ -30,3 +30,15 @@
   width: 94%;
 }
 
+@media (min-width: 390px) and (max-width: 844px){
+  .cardBody{
+    flex-direction: column;
+  }
+  .cardDivider{
+    display: none;
+  }
+  .cardButton{
+    margin-bottom: 10px;
+  }
+}
+
