@@ -12,19 +12,32 @@ interface FilterProps {
   handleHideLeftArrow: () => boolean,
   maxProducts: number,
   actualProducts: number,
-  handleLowestPriceFiltering: any
+  handleLowestPriceFiltering: any,
+  handleHighestPriceFiltering: any
 }
 
-const Filter: FC<FilterProps> = ({handlePage, handleHideRightArrow, handleHideLeftArrow, maxProducts, actualProducts, handleLowestPriceFiltering}) => {
+const Filter: FC<FilterProps> = ({handlePage, handleHideRightArrow, handleHideLeftArrow, maxProducts, actualProducts, handleLowestPriceFiltering, handleHighestPriceFiltering}) => {
   const hideLeftArrow = handleHideLeftArrow();
   const hideRightArrow = handleHideRightArrow();
 
-  const PriceFilter = (event: React.MouseEvent<HTMLElement>): void => {
-    console.log(event);
+  const LowestPriceFilter = (event: React.MouseEvent<HTMLElement>): void => {
+    const highestPriceBtn = document.querySelector('button#highestPrice') as HTMLElement;
     const value = event.target as HTMLElement;
-    console.log(document.querySelector('button#highestPrice'));
+    highestPriceBtn.style.background = 'rgb(237 237 237)';
+    highestPriceBtn.style.color = 'rgb(172 170 170)';
     value.style.background = '#55cce3';
     value.style.color = 'white';
+    handleLowestPriceFiltering();
+  }
+
+  const HighestPriceFilter = (event: React.MouseEvent<HTMLElement>): void => {
+    const lowestPriceBtn = document.querySelector('button#lowestPrice') as HTMLElement;
+    const value = event.target as HTMLElement;
+    lowestPriceBtn.style.background = 'rgb(237 237 237)';
+    lowestPriceBtn.style.color = 'rgb(172 170 170)';
+    value.style.background = '#55cce3';
+    value.style.color = 'white';
+    handleHighestPriceFiltering();
   }
 
   return (
@@ -37,10 +50,10 @@ const Filter: FC<FilterProps> = ({handlePage, handleHideRightArrow, handleHideLe
           <Button auto rounded flat className={styles.cardButton}>
             Most Recent
           </Button>
-          <Button id='lowestPrice' auto rounded flat className={styles.cardButton} onClick={PriceFilter}>
+          <Button id='lowestPrice' auto rounded flat className={styles.cardButton} onClick={LowestPriceFilter}>
             Lowest Price
           </Button>
-          <Button id='highestPrice' auto rounded flat className={styles.cardButton} onClick={PriceFilter}>
+          <Button id='highestPrice' auto rounded flat className={styles.cardButton} onClick={HighestPriceFilter}>
             Highest Price
           </Button>
           {

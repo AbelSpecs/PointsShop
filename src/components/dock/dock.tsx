@@ -46,6 +46,14 @@ const Dock: FC<DockProps> = () => {
     const updatedProducts = products;
     updatedProducts.sort((a, b) => a.cost - b.cost);
     setProducts(updatedProducts);
+    setProductsFiltered(updatedProducts.slice(0, quantity));
+  }
+
+  const handleHighestPriceFiltering = () => {
+    const updatedProducts = products;
+    updatedProducts.sort((a, b) => b.cost - a.cost);
+    setProducts(updatedProducts);
+    setProductsFiltered(updatedProducts.slice(0, quantity));
   }
 
   return (
@@ -59,6 +67,7 @@ const Dock: FC<DockProps> = () => {
               maxProducts={products.length}
               actualProducts={actualProducts}
               handleLowestPriceFiltering={handleLowestPriceFiltering}
+              handleHighestPriceFiltering={handleHighestPriceFiltering}
               >
       </Filter>
         {
