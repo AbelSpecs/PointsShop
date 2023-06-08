@@ -5,6 +5,8 @@ import { Product } from '~/types/product';
 const useProduct = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [productsFiltered, setProductsFiltered] = useState<Product[]>([]);
+  const [quantity, setQuantity] = useState(16);
+  const [actualProducts, setActualProducts] = useState(quantity);
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -13,7 +15,7 @@ const useProduct = () => {
     product()
     .then(data => {
       setProducts(data);
-      setProductsFiltered(data.slice(0, 16));
+      setProductsFiltered(data.slice(0, quantity));
     })
     .catch(error => {
       console.log(error);
@@ -21,7 +23,7 @@ const useProduct = () => {
 
   },[]);
 
-  return { products, productsFiltered, setProductsFiltered };
+  return { products, setProducts, productsFiltered, setProductsFiltered, quantity, actualProducts, setActualProducts };
 }
 
 export default useProduct;

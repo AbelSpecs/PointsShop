@@ -13,11 +13,39 @@ import useProduct from '~/hooks/useProduct';
 interface DockProps {}
 
 const Dock: FC<DockProps> = () => {
-  const { products, productsFiltered, setProductsFiltered } = useProduct();
+  const { products, setProducts, productsFiltered, setProductsFiltered, quantity, actualProducts, setActualProducts } = useProduct();
   const { userData } = useUser();
 
-  const handlePage = (): void => {
-    setProductsFiltered(products.slice(16, 32));
+  const handlePage = (next: boolean): void => {
+    next ? setActualProducts(prev => prev + quantity) : setActualProducts(prev => prev - quantity);
+    const firstElement = productsFiltered.at(0);
+    const lastElement = productsFiltered.at(productsFiltered.length - 1);
+    const productFirstIndex = products.findIndex(p => p._id === firstElement?._id);
+    const productLastIndex = products.findIndex(p => p._id === lastElement?._id) + 1;
+    let firstIndex = next ? productFirstIndex + quantity : productFirstIndex - quantity;
+    let lastIndex = next ? productLastIndex + quantity : productLastIndex - quantity;
+
+    setProductsFiltered(products.slice(firstIndex, lastIndex));
+  }
+
+  const handleHideRightArrow = (): boolean => {
+    const lastElement = productsFiltered.at(productsFiltered.length - 1);
+    const product = products.at(products.length - 1);
+    const hide = product?._id === lastElement?._id ? true : false;
+    return hide;
+  }
+
+  const handleHideLeftArrow = (): boolean => {
+    const firstElement = productsFiltered.at(0);
+    const product = products.at(0);
+    const hide = product?._id === firstElement?._id ? true : false;
+    return hide;
+  }
+
+  const handleLowestPriceFiltering = () => {
+    const updatedProducts = products;
+    updatedProducts.sort((a, b) => a.cost - b.cost);
+    setProducts(updatedProducts);
   }
 
   return (
@@ -25,7 +53,14 @@ const Dock: FC<DockProps> = () => {
       <AeroNavbar userData={userData}/>
       <Header/>
       <Grid.Container gap={2} justify="center" className= {styles.gridContainer}>
-      <Filter handlePage={handlePage}></Filter>
+      <Filter handlePage={handlePage}
+              handleHideRightArrow={handleHideRightArrow}
+              handleHideLeftArrow={handleHideLeftArrow}
+              maxProducts={products.length}
+              actualProducts={actualProducts}
+              handleLowestPriceFiltering={handleLowestPriceFiltering}
+              >
+      </Filter>
         {
           productsFiltered?.map((product, i) => {
             return (

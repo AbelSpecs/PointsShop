@@ -10,6 +10,7 @@
   align-items: center;
   flex-direction: row;
   position: relative;
+  justify-content: flex-start;
 }
 
 .cardDivider{
@@ -27,10 +28,10 @@
 .bottomDivider{
   position: absolute;
   bottom: 10px;
-  width: 94%;
+  width: 96%;
 }
 
-@media (min-width: 390px) and (max-width: 844px){
+@media (min-width: 390px) and (max-width: 960px){
   .cardBody{
     flex-direction: column;
   }
