@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import styles from './filter.module.css';
 import { FilterWrapper } from './filter.styled';
 import { Button, Card, Image, Text, Grid, PressEvent } from "@nextui-org/react";
@@ -8,26 +8,43 @@ import arrowLeft from '../../assets/icons/arrow-left.svg';
 
 interface FilterProps {
   handlePage: any,
-  handleHideRightArrow: () => boolean,
-  handleHideLeftArrow: () => boolean,
   maxProducts: number,
   actualProducts: number,
-  handleLowestPriceFiltering: any,
-  handleHighestPriceFiltering: any
+  handleHideRightArrow: () => boolean,
+  handleHideLeftArrow: () => boolean,
+  handleLowestPriceFiltering: () => void,
+  handleHighestPriceFiltering: () => void,
+  handleNormalPriceFiltering: () => void
 }
 
-const Filter: FC<FilterProps> = ({handlePage, handleHideRightArrow, handleHideLeftArrow, maxProducts, actualProducts, handleLowestPriceFiltering, handleHighestPriceFiltering}) => {
+const Filter: FC<FilterProps> = ({handlePage, handleHideRightArrow, handleHideLeftArrow, maxProducts, actualProducts, handleLowestPriceFiltering, handleHighestPriceFiltering, handleNormalPriceFiltering}) => {
   const hideLeftArrow = handleHideLeftArrow();
   const hideRightArrow = handleHideRightArrow();
+  const [active, setActive] = useState({
+    lowestPrice: false,
+    highestPrice: false
+  });
 
   const LowestPriceFilter = (event: React.MouseEvent<HTMLElement>): void => {
     const highestPriceBtn = document.querySelector('button#highestPrice') as HTMLElement;
     const value = event.target as HTMLElement;
     highestPriceBtn.style.background = 'rgb(237 237 237)';
     highestPriceBtn.style.color = 'rgb(172 170 170)';
-    value.style.background = '#55cce3';
-    value.style.color = 'white';
-    handleLowestPriceFiltering();
+
+    if(!active.lowestPrice){
+      value.style.background = '#55cce3';
+      value.style.color = 'white';
+      handleLowestPriceFiltering();
+    }
+
+    if(active.lowestPrice){
+      value.style.background = 'rgb(237 237 237)';
+      value.style.color = 'rgb(172 170 170)';
+      handleNormalPriceFiltering();
+    }
+
+    setActive({...active, highestPrice: false, lowestPrice: !active.lowestPrice});
+
   }
 
   const HighestPriceFilter = (event: React.MouseEvent<HTMLElement>): void => {
@@ -35,9 +52,21 @@ const Filter: FC<FilterProps> = ({handlePage, handleHideRightArrow, handleHideLe
     const value = event.target as HTMLElement;
     lowestPriceBtn.style.background = 'rgb(237 237 237)';
     lowestPriceBtn.style.color = 'rgb(172 170 170)';
-    value.style.background = '#55cce3';
-    value.style.color = 'white';
-    handleHighestPriceFiltering();
+
+    if(!active.highestPrice){
+      value.style.background = '#55cce3';
+      value.style.color = 'white';
+      handleHighestPriceFiltering();
+    }
+
+    if(active.highestPrice){
+      value.style.background = 'rgb(237 237 237)';
+      value.style.color = 'rgb(172 170 170)';
+      handleNormalPriceFiltering();
+    }
+
+    setActive({...active, lowestPrice: false, highestPrice: !active.highestPrice});
+
   }
 
   return (

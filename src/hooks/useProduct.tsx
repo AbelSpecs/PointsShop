@@ -4,6 +4,7 @@ import { Product } from '~/types/product';
 
 const useProduct = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [productsCopy, setProductsCopy] = useState<Product[]>([]);
   const [productsFiltered, setProductsFiltered] = useState<Product[]>([]);
   const [quantity, setQuantity] = useState(16);
   const [actualProducts, setActualProducts] = useState(quantity);
@@ -15,6 +16,7 @@ const useProduct = () => {
     product()
     .then(data => {
       setProducts(data);
+      setProductsCopy(data);
       setProductsFiltered(data.slice(0, quantity));
     })
     .catch(error => {
@@ -23,7 +25,7 @@ const useProduct = () => {
 
   },[]);
 
-  return { products, setProducts, productsFiltered, setProductsFiltered, quantity, actualProducts, setActualProducts };
+  return { products, setProducts, productsFiltered, setProductsFiltered, quantity, actualProducts, setActualProducts, productsCopy };
 }
 
 export default useProduct;

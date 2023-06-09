@@ -8,13 +8,17 @@ import AeroCard from '../aero-card/aero-card';
 import Filter from '../filter/filter';
 import useUser from '~/hooks/useUser';
 import useProduct from '~/hooks/useProduct';
+import Cart from '../cart/cart';
+import useTranslation from '~/hooks/useTranslation';
 
 
 interface DockProps {}
 
 const Dock: FC<DockProps> = () => {
-  const { products, setProducts, productsFiltered, setProductsFiltered, quantity, actualProducts, setActualProducts } = useProduct();
+  const { products, setProducts, productsFiltered, setProductsFiltered, quantity, actualProducts, setActualProducts, productsCopy } = useProduct();
+  const { x, y, rotate, setX, setY, setRotate } = useTranslation();
   const { userData } = useUser();
+  const [hideCart, setHideCart] = useState(false);
 
   const handlePage = (next: boolean): void => {
     next ? setActualProducts(prev => prev + quantity) : setActualProducts(prev => prev - quantity);
@@ -42,25 +46,37 @@ const Dock: FC<DockProps> = () => {
     return hide;
   }
 
-  const handleLowestPriceFiltering = () => {
-    const updatedProducts = products;
+  const handleLowestPriceFiltering = (): void => {
+    const updatedProducts = [...products];
     updatedProducts.sort((a, b) => a.cost - b.cost);
     setProducts(updatedProducts);
     setProductsFiltered(updatedProducts.slice(0, quantity));
     setActualProducts(quantity);
   }
 
-  const handleHighestPriceFiltering = () => {
-    const updatedProducts = products;
+  const handleHighestPriceFiltering = (): void => {
+    const updatedProducts = [...products];
     updatedProducts.sort((a, b) => b.cost - a.cost);
     setProducts(updatedProducts);
     setProductsFiltered(updatedProducts.slice(0, quantity));
     setActualProducts(quantity);
   }
 
+  const handleNormalPriceFiltering = (): void => {
+    setProducts(productsCopy);
+    setProductsFiltered(productsCopy.slice(0, quantity));
+    setActualProducts(quantity);
+  }
+
+  const handleToggleCart = (): void => {
+    hideCart ? setY(-500) : setY(1);
+    setHideCart(prev => !prev);
+  }
+
   return (
     <DockWrapper data-testid="Dock">
-      <AeroNavbar userData={userData}/>
+      <AeroNavbar userData={userData} handleToggleCart={handleToggleCart}/>
+      <Cart x={x} y={y} rotate={rotate} setX={setX} setY={setY}/>
       <Header/>
       <Grid.Container gap={2} justify="center" className= {styles.gridContainer}>
       <Filter handlePage={handlePage}
@@ -70,6 +86,7 @@ const Dock: FC<DockProps> = () => {
               actualProducts={actualProducts}
               handleLowestPriceFiltering={handleLowestPriceFiltering}
               handleHighestPriceFiltering={handleHighestPriceFiltering}
+              handleNormalPriceFiltering={handleNormalPriceFiltering}
               >
       </Filter>
         {
