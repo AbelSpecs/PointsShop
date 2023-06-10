@@ -8,7 +8,7 @@ const useTranslation = () => {
   const yPoint = -500;
   const [x, setX] = useState(xPoint - 400);
   const [y, setY] = useState(yPoint);
-  const [rotate, setRotate] = useState(0);
+  const [rotate, setRotate] = useState(-54);
 
   return { x, y, rotate, setX, setY, setRotate };
 }

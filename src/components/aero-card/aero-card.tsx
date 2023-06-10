@@ -5,20 +5,33 @@ import { Button, Card, Container, Text } from '@nextui-org/react';
 import { Product } from '~/types/product';
 import { Image } from '@nextui-org/react';
 import coin from '../../assets/icons/coin.svg';
+import { User } from '~/types/user';
 
 
 
 interface AeroCardProps {
-  product: Product
+  product: Product,
+  handleAddCart : (product: Product) => void,
+  userData: User | undefined
 }
 
-const AeroCard: FC<AeroCardProps> = ({product} : AeroCardProps) => {
+const AeroCard: FC<AeroCardProps> = ({product, handleAddCart, userData} : AeroCardProps) => {
+  const isPurchasable = userData?.points! < product.cost;
 
   const handleCardBefore = (event: React.MouseEvent<HTMLElement>) : void => {
     const value = event.target as HTMLElement;
     const btn : HTMLButtonElement = value.querySelector('button')!;
-    const cost : HTMLElement = value.querySelector('h6')!;
+    const cost : HTMLElement = value.querySelector('h6#cost')!;
     const coin : HTMLElement = value.querySelector('#coin')!;
+
+    if(isPurchasable){
+      btn ? btn.style.display = 'none' : '';
+      coin ? coin.style.display = 'none' : '';
+      cost ? cost.style.display = 'none' : '';
+      value.classList.remove(`${styles.cardBefore}`);
+      return;
+    }
+
     if (!btn) { return; }
     if (!cost) { return; }
     if (!coin) { return; }
@@ -27,19 +40,31 @@ const AeroCard: FC<AeroCardProps> = ({product} : AeroCardProps) => {
     coin.style.display = event.type.match('mouseleave') ? 'none' : 'block';
   }
 
+  const addProduct = () => {
+    handleAddCart(product);
+  }
+
   return (
     <AeroCardWrapper data-testid="AeroCard" >
-      <Card css={{ $$cardColor: 'white', minWidth: '250px', boxShadow: '9px 8px 8px -10px rgba(0,0,0,0.75)'}}
-            variant='bordered'
-            isHoverable
+      <Card variant='bordered'
+            isHoverable={!isPurchasable}
             onMouseEnter={handleCardBefore}
             onMouseLeave={handleCardBefore}
-            className={styles.card}>
-          <Text h6 size={30} color="white" css={{ m: 0 }} weight='normal' className={styles.cardCost}>
+            className={`${styles.card} ${styles.cardBefore}`}>
+          {
+            isPurchasable &&
+            <Container className={styles.container}>
+              <Text id='morePoints' h6 size={10} css={{ m: 0 }} weight='bold' className={styles.cardText}>
+                    You need {product.cost - userData?.points!}
+              </Text>
+              <Image src={coin} containerCss={{zIndex: 1, left: '240px', width: '15px', height: '15px', position: 'absolute'}}/>
+            </Container>
+          }
+          <Text id='cost' h6 size={30} color="white" css={{ m: 0 }} weight='normal' className={styles.cardCost}>
                 {product.cost}
           </Text>
-          <Image id='coin' src={coin} className={styles.coin} css={{display: 'none'}} />
-          <Button auto rounded bordered ripple className={styles.cardButton}>
+          <Image id='coin' src={coin} className={styles.coin}  />
+          <Button auto rounded bordered ripple className={styles.cardButton} onClick={addProduct}>
             Reedem Now
           </Button>
         <Card.Body>

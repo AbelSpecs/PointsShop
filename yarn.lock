@@ -2791,6 +2791,11 @@
     "object-assign" "^4.1.1"
     "scheduler" "^0.20.1"
 
+"react-icons@^4.9.0":
+  "integrity" "sha512-ijUnFr//ycebOqujtqtV9PFS7JjhWg0QU6ykURVHuL4cbofvRCf3f6GMn9+fBktEFQOIVZnuAYLZdiyadRQRFg=="
+  "resolved" "https://registry.npmjs.org/react-icons/-/react-icons-4.9.0.tgz"
+  "version" "4.9.0"
+
 "react-is@^16.7.0", "react-is@^16.8.1", "react-is@>= 16.8.0":
   "integrity" "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ=="
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
@@ -2801,7 +2806,7 @@
   "resolved" "https://registry.npmjs.org/react-refresh/-/react-refresh-0.9.0.tgz"
   "version" "0.9.0"
 
-"react@^16.8.0 || ^17.0.0-rc.1 || ^18.0.0", "react@^17.0.0", "react@>= 16.3.0", "react@>= 16.8.0", "react@>=16.8 || ^17.0.0", "react@>=16.8.0", "react@17.0.1":
+"react@*", "react@^16.8.0 || ^17.0.0-rc.1 || ^18.0.0", "react@^17.0.0", "react@>= 16.3.0", "react@>= 16.8.0", "react@>=16.8 || ^17.0.0", "react@>=16.8.0", "react@17.0.1":
   "integrity" "sha512-lG9c9UuMHdcAexXtigOZLX8exLWkW0Ku29qPRU8uhF2R9BN96dLCt0psvzPLlHc5OWkgymP3qwTRgbnw5BKx3w=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.1.tgz"
   "version" "17.0.1"

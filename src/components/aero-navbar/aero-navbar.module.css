@@ -23,3 +23,8 @@ div.container{
 .name{
   width: 100%;
 }
+
+button.cartButton{
+  padding: 5px;
+  border-radius: 45px;
+}

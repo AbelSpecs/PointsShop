@@ -18,7 +18,7 @@ const useUser = () => {
 
   },[]);
 
-  return { userData };
+  return { userData, setUserData };
 
 }
 
