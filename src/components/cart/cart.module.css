@@ -1,0 +1,7 @@
+.cart{
+  border: solid;
+  width: 390px;
+  height: 390px;
+  position: absolute;
+  z-index:1;
+}
