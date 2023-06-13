@@ -1,8 +1,14 @@
 .card{
   position: relative;
-  cursor: pointer;
   justify-content: center;
   align-items: center;
+  min-width: 250px;
+  box-shadow: 9px 8px 8px -10px rgba(0,0,0,0.75);
+  background-color: white;
+}
+
+.cardBefore{
+  cursor: pointer;
 }
 
 .card::before{
@@ -18,7 +24,6 @@
   background-color: #55cce3;
   opacity: 0.9;
   z-index: 1;
-
 }
 
 .cardFooterText{
@@ -41,6 +46,10 @@
   left: 170px;
 }
 
+.coin img{
+  display: none;
+}
+
 .cardCost{
   display: none;
   position: absolute;
@@ -57,6 +66,19 @@
   position: absolute;
   top: 50%;
   z-index: 1;
+}
+
+.cardText{
+  color: gray;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 50px;
+}
+
+.container{
+  position: absolute;
+  top: 20px;
 }
 
 

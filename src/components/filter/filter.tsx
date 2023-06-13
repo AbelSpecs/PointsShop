@@ -1,7 +1,7 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useCallback, useRef, useState } from 'react';
 import styles from './filter.module.css';
 import { FilterWrapper } from './filter.styled';
-import { Button, Card, Image, Text, Grid, PressEvent } from "@nextui-org/react";
+import { Button, Card, Image, Text } from "@nextui-org/react";
 import arowRight from '../../assets/icons/arrow-right.svg';
 import arrowLeft from '../../assets/icons/arrow-left.svg';
 
@@ -17,7 +17,9 @@ interface FilterProps {
   handleNormalPriceFiltering: () => void
 }
 
-const Filter: FC<FilterProps> = ({handlePage, handleHideRightArrow, handleHideLeftArrow, maxProducts, actualProducts, handleLowestPriceFiltering, handleHighestPriceFiltering, handleNormalPriceFiltering}) => {
+const Filter: FC<FilterProps> = ({handlePage, handleHideRightArrow, handleHideLeftArrow, maxProducts, actualProducts, handleLowestPriceFiltering, handleHighestPriceFiltering, handleNormalPriceFiltering}: FilterProps) => {
+  const highestPriceBtnRef = useRef<HTMLButtonElement>(null);
+  const lowestPriceBtnRef = useRef<HTMLButtonElement>(null);
   const hideLeftArrow = handleHideLeftArrow();
   const hideRightArrow = handleHideRightArrow();
   const [active, setActive] = useState({
@@ -26,7 +28,7 @@ const Filter: FC<FilterProps> = ({handlePage, handleHideRightArrow, handleHideLe
   });
 
   const LowestPriceFilter = (event: React.MouseEvent<HTMLElement>): void => {
-    const highestPriceBtn = document.querySelector('button#highestPrice') as HTMLElement;
+    const highestPriceBtn = highestPriceBtnRef.current as HTMLButtonElement;
     const value = event.target as HTMLElement;
     highestPriceBtn.style.background = 'rgb(237 237 237)';
     highestPriceBtn.style.color = 'rgb(172 170 170)';
@@ -45,10 +47,10 @@ const Filter: FC<FilterProps> = ({handlePage, handleHideRightArrow, handleHideLe
 
     setActive({...active, highestPrice: false, lowestPrice: !active.lowestPrice});
 
-  }
+  };
 
   const HighestPriceFilter = (event: React.MouseEvent<HTMLElement>): void => {
-    const lowestPriceBtn = document.querySelector('button#lowestPrice') as HTMLElement;
+    const lowestPriceBtn = lowestPriceBtnRef.current as HTMLButtonElement;
     const value = event.target as HTMLElement;
     lowestPriceBtn.style.background = 'rgb(237 237 237)';
     lowestPriceBtn.style.color = 'rgb(172 170 170)';
@@ -67,7 +69,7 @@ const Filter: FC<FilterProps> = ({handlePage, handleHideRightArrow, handleHideLe
 
     setActive({...active, lowestPrice: false, highestPrice: !active.highestPrice});
 
-  }
+  };
 
   return (
     <FilterWrapper data-testid="Filter">
@@ -79,44 +81,38 @@ const Filter: FC<FilterProps> = ({handlePage, handleHideRightArrow, handleHideLe
           <Button auto rounded flat className={styles.cardButton}>
             Most Recent
           </Button>
-          <Button id='lowestPrice' auto rounded flat className={styles.cardButton} onClick={LowestPriceFilter}>
+          <Button ref={lowestPriceBtnRef} auto rounded flat className={styles.cardButton} onClick={LowestPriceFilter}>
             Lowest Price
           </Button>
-          <Button id='highestPrice' auto rounded flat className={styles.cardButton} onClick={HighestPriceFilter}>
+          <Button ref={highestPriceBtnRef} auto rounded flat className={styles.cardButton} onClick={HighestPriceFilter}>
             Highest Price
           </Button>
-          {
-            !hideLeftArrow &&
-            <Image src={arrowLeft} css={{cursor: 'pointer'}}
-                    containerCss={{
-                      width: '40px',
-                      margin: 0,
-                      position: 'absolute',
-                      right: '60px',
-                      bottom: '135px',
-                      '@sm': {
-                        bottom: 'unset'
-                      }
-                    }}
-                    onClick={() => {handlePage(false);}}
-                    />
-          }
-          {
-            !hideRightArrow &&
-            <Image src={arowRight} css={{cursor: 'pointer'}}
-                    containerCss={{
-                      width: '40px',
-                      margin: 0,
-                      position: 'absolute',
-                      right: '10px',
-                      bottom: '135px',
-                      '@sm' : {
-                        bottom: 'unset'
-                      }
-                    }}
-                    onClick={() => {handlePage(true);}}
-                    />
-          }
+          <Image src={arrowLeft} css={{cursor: 'pointer', display: hideLeftArrow ? 'none' : 'block'}}
+                  containerCss={{
+                    width: '40px',
+                    margin: 0,
+                    position: 'absolute',
+                    right: '60px',
+                    bottom: '135px',
+                    '@sm': {
+                      bottom: 'unset'
+                    }
+                  }}
+                  onClick={() => {handlePage(false);}}
+          />
+          <Image src={arowRight} css={{cursor: 'pointer', display: hideRightArrow ? 'none' : 'block'}}
+                  containerCss={{
+                    width: '40px',
+                    margin: 0,
+                    position: 'absolute',
+                    right: '10px',
+                    bottom: '135px',
+                    '@sm' : {
+                      bottom: 'unset'
+                    }
+                  }}
+                  onClick={() => {handlePage(true);}}
+          />
         </Card.Body>
         <Card.Divider className={styles.bottomDivider}/>
       </Card>

@@ -10,15 +10,20 @@ import useUser from '~/hooks/useUser';
 import useProduct from '~/hooks/useProduct';
 import Cart from '../cart/cart';
 import useTranslation from '~/hooks/useTranslation';
+import { Product } from '~/types/product';
+import { User } from '~/types/user';
 
 
 interface DockProps {}
 
 const Dock: FC<DockProps> = () => {
   const { products, setProducts, productsFiltered, setProductsFiltered, quantity, actualProducts, setActualProducts, productsCopy } = useProduct();
-  const { x, y, rotate, setX, setY, setRotate } = useTranslation();
-  const { userData } = useUser();
+  const { x, y, rotate, setX, setY, yPoint } = useTranslation();
+  const { userData, setUserData } = useUser();
   const [hideCart, setHideCart] = useState(false);
+  const [cartProducts, setCartProducts] = useState<Product[]>([]);
+  const yHidePoint = yPoint;
+  const yShowPoint = 1;
 
   const handlePage = (next: boolean): void => {
     next ? setActualProducts(prev => prev + quantity) : setActualProducts(prev => prev - quantity);
@@ -69,14 +74,37 @@ const Dock: FC<DockProps> = () => {
   }
 
   const handleToggleCart = (): void => {
-    hideCart ? setY(-500) : setY(1);
+    hideCart ? setY(yHidePoint) : setY(yShowPoint);
     setHideCart(prev => !prev);
+  }
+
+  const handleAddCart = (product: Product): void => {
+    const newPoints = userData?.points! - product.cost;
+    const newUserData: User = {
+      _id: userData?._id!,
+      name: userData?.name!,
+      points: newPoints,
+      createDate: userData?.createDate!,
+      redeemHistory: userData?.redeemHistory!,
+      __v: userData?.__v!
+    }
+
+    setUserData(newUserData);
+    const updatedCart = [...cartProducts];
+    updatedCart.push(product);
+    setCartProducts(updatedCart);
   }
 
   return (
     <DockWrapper data-testid="Dock">
       <AeroNavbar userData={userData} handleToggleCart={handleToggleCart}/>
-      <Cart x={x} y={y} rotate={rotate} setX={setX} setY={setY}/>
+      <Cart x={x}
+            y={y}
+            rotate={rotate}
+            setX={setX}
+            setY={setY}
+            cartProducts={cartProducts}
+            />
       <Header/>
       <Grid.Container gap={2} justify="center" className= {styles.gridContainer}>
       <Filter handlePage={handlePage}
@@ -93,7 +121,11 @@ const Dock: FC<DockProps> = () => {
           productsFiltered?.map((product, i) => {
             return (
               <Grid xs={12} sm={4} md={3} lg={3} xl={3} key={i} justify='center' className={styles.grid}>
-                <AeroCard product={product} />
+                <AeroCard
+                  product={product}
+                  handleAddCart={handleAddCart}
+                  userData={userData}
+                  />
               </Grid>
             )
           })

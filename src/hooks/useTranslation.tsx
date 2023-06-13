@@ -6,11 +6,13 @@ const useTranslation = () => {
   const scrollbarWidth = innerWidth - clientWidth;
   const xPoint = innerWidth - scrollbarWidth;
   const yPoint = -500;
-  const [x, setX] = useState(xPoint - 400);
+  const boxWidth = 400;
+  const boxRotationDegree = 54;
+  const [x, setX] = useState(xPoint - boxWidth);
   const [y, setY] = useState(yPoint);
-  const [rotate, setRotate] = useState(0);
+  const [rotate, setRotate] = useState(-boxRotationDegree);
 
-  return { x, y, rotate, setX, setY, setRotate };
+  return { x, y, rotate, setX, setY, setRotate, yPoint };
 }
 
 export default useTranslation;

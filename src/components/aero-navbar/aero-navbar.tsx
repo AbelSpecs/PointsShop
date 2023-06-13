@@ -5,7 +5,7 @@ import { Navbar, Text, Container, Image, Button } from "@nextui-org/react";
 import { User } from '~/types/user';
 import AeroLogo from "../../assets/aero-logo";
 import coin from '../../assets/icons/coin.svg';
-
+import { BiCart } from "react-icons/bi";
 
 interface AeroNavbarProps {
   userData: User | undefined,
@@ -21,12 +21,16 @@ const AeroNavbar: FC<AeroNavbarProps> = ({userData, handleToggleCart}) => {
           <AeroLogo />
         </Navbar.Brand>
         <Navbar.Content className={styles.userInfo}>
-          <Button onClick={handleToggleCart}>Cart</Button>
           <Text className={styles.name}>{userData?.name}</Text>
           <Container className={styles.container}>
             <Text>{userData?.points}</Text>
             <Image id='coin' src={coin} />
           </Container>
+          <Button auto light
+                  onClick={handleToggleCart}
+                  className={styles.cartButton}
+                  icon={<BiCart size={25}/>}>
+          </Button>
         </Navbar.Content>
       </Navbar>
     </AeroNavbarWrapper>
