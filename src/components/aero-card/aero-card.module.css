@@ -9,19 +9,21 @@
 
 .cardBefore{
   cursor: pointer;
-  &::before{
-    content: "";
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    transition: all 0.5s ease-in-out;
-    z-index: 1;
-  };
-  &:hover::before{
-    background-color: #55cce3;
-    opacity: 0.9;
-    z-index: 1;
-  };
+}
+
+.card::before{
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transition: all 0.5s ease-in-out;
+  z-index: 1;
+}
+
+.card:hover::before{
+  background-color: #55cce3;
+  opacity: 0.9;
+  z-index: 1;
 }
 
 .cardFooterText{

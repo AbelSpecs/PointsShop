@@ -18,10 +18,12 @@ interface DockProps {}
 
 const Dock: FC<DockProps> = () => {
   const { products, setProducts, productsFiltered, setProductsFiltered, quantity, actualProducts, setActualProducts, productsCopy } = useProduct();
-  const { x, y, rotate, setX, setY, setRotate } = useTranslation();
+  const { x, y, rotate, setX, setY, yPoint } = useTranslation();
   const { userData, setUserData } = useUser();
   const [hideCart, setHideCart] = useState(false);
   const [cartProducts, setCartProducts] = useState<Product[]>([]);
+  const yHidePoint = yPoint;
+  const yShowPoint = 1;
 
   const handlePage = (next: boolean): void => {
     next ? setActualProducts(prev => prev + quantity) : setActualProducts(prev => prev - quantity);
@@ -72,7 +74,7 @@ const Dock: FC<DockProps> = () => {
   }
 
   const handleToggleCart = (): void => {
-    hideCart ? setY(-500) : setY(1);
+    hideCart ? setY(yHidePoint) : setY(yShowPoint);
     setHideCart(prev => !prev);
   }
 

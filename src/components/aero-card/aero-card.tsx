@@ -7,8 +7,6 @@ import { Image } from '@nextui-org/react';
 import coin from '../../assets/icons/coin.svg';
 import { User } from '~/types/user';
 
-
-
 interface AeroCardProps {
   product: Product,
   handleAddCart : (product: Product) => void,

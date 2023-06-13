@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "types": ["vite/client"],
+    "types": ["vite/client", "vite-plugin-pwa/client"],
     "allowJs": true,
     "skipLibCheck": false,
     "esModuleInterop": false,
@@ -20,5 +20,6 @@
       "~/*": ["./*"]
     }
   },
-  "include": ["./src"]
+  "include": ["./src"],
+  "exclude": ["node_modules"]
 }
