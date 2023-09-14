@@ -72,11 +72,12 @@ const Filter: FC<FilterProps> = ({handlePage, handleHideRightArrow, handleHideLe
   };
 
   return (
-    <FilterWrapper data-testid="Filter">
+    // <FilterWrapper data-testid="Filter">
+    <>
       <section className={styles.filter}>
-        <Text weight='medium' color='gray'>{actualProducts} of {maxProducts} products</Text>
+        <p color='gray'>{actualProducts} of {maxProducts} products</p>
         <Card.Divider className={styles.cardDivider}/>
-        <Text weight='medium' color='rgb(172 170 170)' style={{marginRight: '20px'}}>Sort by:</Text>
+        <p color='rgb(172 170 170)' style={{marginRight: '20px'}}>Sort by:</p>
         <Button auto rounded flat className={styles.cardButton}>
           Most Recent
         </Button>
@@ -153,7 +154,7 @@ const Filter: FC<FilterProps> = ({handlePage, handleHideRightArrow, handleHideLe
         </Card.Body>
         <Card.Divider className={styles.bottomDivider}/>
       </Card> */}
-    </FilterWrapper>
+    </>
   );
 };
 
