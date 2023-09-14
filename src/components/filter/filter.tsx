@@ -73,7 +73,44 @@ const Filter: FC<FilterProps> = ({handlePage, handleHideRightArrow, handleHideLe
 
   return (
     <FilterWrapper data-testid="Filter">
-      <Card variant='flat' className={styles.card}>
+      <section className={styles.filter}>
+        <Text weight='medium' color='gray'>{actualProducts} of {maxProducts} products</Text>
+        <Card.Divider className={styles.cardDivider}/>
+        <Text weight='medium' color='rgb(172 170 170)' style={{marginRight: '20px'}}>Sort by:</Text>
+        <Button auto rounded flat className={styles.cardButton}>
+          Most Recent
+        </Button>
+        <Button ref={lowestPriceBtnRef} auto rounded flat className={styles.cardButton} onClick={LowestPriceFilter}>
+          Lowest Price
+        </Button>
+        <Button ref={highestPriceBtnRef} auto rounded flat className={styles.cardButton} onClick={HighestPriceFilter}>
+          Highest Price
+        </Button>
+        <Image src={arrowLeft} css={{cursor: 'pointer', display: hideLeftArrow ? 'none' : 'block'}}
+                  containerCss={{
+                    width: '40px',
+                    margin: 0,
+                    bottom: '135px',
+                    '@sm': {
+                      bottom: 'unset'
+                    }
+                  }}
+                  onClick={() => {handlePage(false);}}
+        />
+        <Image src={arowRight} css={{cursor: 'pointer', display: hideRightArrow ? 'none' : 'block'}}
+                containerCss={{
+                  width: '40px',
+                  margin: 0,
+                  bottom: '135px',
+                  '@sm' : {
+                    bottom: 'unset'
+                  }
+                }}
+                onClick={() => {handlePage(true);}}
+        />
+      </section>
+      <Card.Divider className={styles.bottomDivider}/>
+      {/* <Card variant='flat' className={styles.card}>
         <Card.Body className={styles.cardBody}>
           <Text weight='medium' color='gray'>{actualProducts} of {maxProducts} products</Text>
           <Card.Divider className={styles.cardDivider}/>
@@ -115,7 +152,7 @@ const Filter: FC<FilterProps> = ({handlePage, handleHideRightArrow, handleHideLe
           />
         </Card.Body>
         <Card.Divider className={styles.bottomDivider}/>
-      </Card>
+      </Card> */}
     </FilterWrapper>
   );
 };

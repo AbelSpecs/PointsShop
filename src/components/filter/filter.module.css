@@ -1,4 +1,13 @@
-.card{
+/* .card{
+  justify-content: center;
+  background-color: white;
+  max-width: 100%;
+  position: relative;
+  align-items: center;
+} */
+
+.filter{
+  display: flex;
   justify-content: center;
   background-color: white;
   max-width: 100%;
@@ -6,12 +15,19 @@
   align-items: center;
 }
 
-.cardBody{
+/* .filterBody{
   align-items: center;
   flex-direction: row;
   position: relative;
   justify-content: flex-start;
-}
+} */
+
+/* .cardBody{
+  align-items: center;
+  flex-direction: row;
+  position: relative;
+  justify-content: flex-start;
+} */
 
 .cardDivider{
   transform: rotateZ(90deg);
