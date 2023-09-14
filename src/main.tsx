@@ -1,17 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { registerSW } from "virtual:pwa-register";
 import App from "./App";
+import serviceWorker from "./serviceWorker";
 
-import "./theme.css";
-
-// const updateSW = registerSW({
-//   onNeedRefresh() {
-//     if (confirm("New content available. Reload?")) {
-//       updateSW(true);
-//     }
-//   },
-// });
 
 ReactDOM.render(
   <React.StrictMode>
@@ -21,3 +12,4 @@ ReactDOM.render(
 
 );
 
+serviceWorker();

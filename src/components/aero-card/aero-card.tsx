@@ -1,11 +1,10 @@
 import React, { FC } from 'react';
 import styles from './aero-card.module.css';
 import { AeroCardWrapper } from './aero-card.styled';
-import { Button, Card, Container, Text } from '@nextui-org/react';
 import { Product } from '~/types/product';
-import { Image } from '@nextui-org/react';
-import coin from '../../assets/icons/coin.svg';
 import { User } from '~/types/user';
+import PointsCard  from '../pointsCard/pointsCard';
+import NoPointsCard from '../noPointsCard/noPointsCard';
 
 interface AeroCardProps {
   product: Product,
@@ -26,7 +25,7 @@ const AeroCard: FC<AeroCardProps> = ({product, handleAddCart, userData} : AeroCa
       btn ? btn.style.display = 'none' : '';
       coin ? coin.style.display = 'none' : '';
       cost ? cost.style.display = 'none' : '';
-      value.classList.remove(`${styles.cardBefore}`);
+
       return;
     }
 
@@ -38,33 +37,43 @@ const AeroCard: FC<AeroCardProps> = ({product, handleAddCart, userData} : AeroCa
     coin.style.display = event.type.match('mouseleave') ? 'none' : 'block';
   }
 
-  const addProduct = () => {
+  const addProduct = (): void => {
     handleAddCart(product);
   }
 
   return (
     <AeroCardWrapper data-testid="AeroCard" >
-      <Card variant='bordered'
+      {
+        isPurchasable
+        ?
+        <NoPointsCard product={product} userData={userData}></NoPointsCard>
+        :
+        <PointsCard product={product} addProduct={addProduct} handleCardBefore={handleCardBefore}></PointsCard>
+      }
+      {/* <MyCard id='mycard' variant='bordered'
             isHoverable={!isPurchasable}
             onMouseEnter={handleCardBefore}
             onMouseLeave={handleCardBefore}
-            className={`${styles.card} ${styles.cardBefore}`}>
+            >
           {
             isPurchasable &&
-            <Container className={styles.container}>
-              <Text id='morePoints' h6 size={10} css={{ m: 0 }} weight='bold' className={styles.cardText}>
+            <MyContainer >
+              <MyCardText id='morePoints' h6>
                     You need {product.cost - userData?.points!}
-              </Text>
+              </MyCardText>
               <Image src={coin} containerCss={{zIndex: 1, left: '240px', width: '15px', height: '15px', position: 'absolute'}}/>
-            </Container>
+            </MyContainer>
           }
-          <Text id='cost' h6 size={30} color="white" css={{ m: 0 }} weight='normal' className={styles.cardCost}>
+          <MyCardCost id='cost' h6 color='white'>
                 {product.cost}
-          </Text>
-          <Image id='coin' src={coin} className={styles.coin}  />
-          <Button auto rounded bordered ripple className={styles.cardButton} onClick={addProduct}>
+          </MyCardCost>
+          <Container id='coin' css={{display: 'none'}}>
+            <MyCoin src={coin}/>
+          </Container>
+          <MyCardButton auto rounded bordered ripple onClick={addProduct}
+                        css={{color: 'gray', backgroundColor: 'white', borderColor: 'transparent'}}>
             Reedem Now
-          </Button>
+          </MyCardButton>
         <Card.Body>
           <Card.Image
             src={product.img.url}
@@ -75,8 +84,8 @@ const AeroCard: FC<AeroCardProps> = ({product, handleAddCart, userData} : AeroCa
           >
           </Card.Image>
         </Card.Body>
-        <Card.Divider className={styles.cardDivider}/>
-        <Card.Footer className={styles.cardFooterText}>
+        <Card.Divider css={{width: '80%', margin: '0 auto', bottom: 10}}/>
+        <Card.Footer css={{flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start'}}>
           <Text h6 size={10} color="gray" css={{ m: 0 }}>
             {product.category}
           </Text>
@@ -84,7 +93,7 @@ const AeroCard: FC<AeroCardProps> = ({product, handleAddCart, userData} : AeroCa
             {product.name}
           </Text>
         </Card.Footer>
-      </Card>
+      </MyCard> */}
     </AeroCardWrapper>
   );
 }

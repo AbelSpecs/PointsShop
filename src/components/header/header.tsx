@@ -1,19 +1,26 @@
 import React, { FC } from 'react';
-import styles from './header.module.css';
 import { HeaderWrapper } from './header.styled';
-import { Text, Image } from "@nextui-org/react";
+import { Text, Image, styled } from "@nextui-org/react";
 import header from '../../assets/header.png';
 
 interface HeaderProps {}
 
-const Header: FC<HeaderProps> = () => (
- <HeaderWrapper data-testid="Header" className={styles.headerContainer}>
-  <Image src={header} className={styles.headerImg} css={{objectFit: 'cover', objectPosition: 'center'}}/>
-  <Text className={styles.text} h1 size={50} weight="bold"
-          css={{
-                  textGradient: "45deg, $cyan50 -20%, $blue100 100%",
-               }}>Electronics</Text>
+const MyText = styled(Text, {
+  textGradient: "45deg, $cyan50 -20%, $blue100 100%",
+  marginTop: 0,
+  position: 'absolute',
+  bottom: 20,
+  left: '15%',
+  fontWeight: 'bold',
+  fontSize: 50
+});
 
+
+const Header: FC<HeaderProps> = () => (
+ <HeaderWrapper data-testid="Header" style={{position: 'relative'}}>
+  <Image src={header} containerCss={{height: 300, width: '100%'}}
+                        css={{objectFit: 'cover', objectPosition: 'center'}}/>
+  <MyText h1>Electronics</MyText>
  </HeaderWrapper>
 );
 

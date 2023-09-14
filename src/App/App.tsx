@@ -1,15 +1,15 @@
 import * as React from "react";
-
-import logo from "../assets/logo.svg";
-
-import styles from "./App.module.scss";
+import styles from "./App.module.css";
 import Dock from "~/components/dock/dock";
+import { NextUIProvider } from '@nextui-org/react';
 
 const App: React.FC = () => {
   return (
-    <main className={styles.container}>
-      <Dock/>
-    </main>
+    <NextUIProvider>
+      {/* <main className={styles.container}> */}
+        <Dock/>
+      {/* </main> */}
+    </NextUIProvider>
   );
 };
 

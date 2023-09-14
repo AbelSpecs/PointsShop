@@ -17,6 +17,7 @@ interface CartProps {
 const Cart: FC<CartProps> = ({x, y, rotate, setX, setY, cartProducts}) => {
 
   const orientation = () => {
+    console.log('me dispare');
     const clientWidth = document.documentElement.clientWidth;
     const xPoint = clientWidth;
     setX(xPoint -400);
