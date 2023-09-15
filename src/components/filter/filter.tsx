@@ -76,15 +76,15 @@ const Filter: FC<FilterProps> = ({handlePage, handleHideRightArrow, handleHideLe
     <>
       <section className={styles.filter}>
         <p color='gray'>{actualProducts} of {maxProducts} products</p>
-        <hr className={styles.cardDivider}/>
+        <hr className={styles.divider}/>
         <p color='rgb(172 170 170)' style={{marginRight: '20px'}}>Sort by:</p>
-        <Button auto rounded flat className={styles.cardButton}>
+        <Button auto rounded flat css={{ color: "rgb(172 170 170);", backgroundColor: "rgb(237 237 237);", marginRight: "20px"}}>
           Most Recent
         </Button>
-        <Button ref={lowestPriceBtnRef} auto rounded flat className={styles.cardButton} onClick={LowestPriceFilter}>
+        <Button ref={lowestPriceBtnRef} auto rounded flat css={{ color: "rgb(172 170 170);", backgroundColor: "rgb(237 237 237);", marginRight: "20px"}} onClick={LowestPriceFilter}>
           Lowest Price
         </Button>
-        <Button ref={highestPriceBtnRef} auto rounded flat className={styles.cardButton} onClick={HighestPriceFilter}>
+        <Button ref={highestPriceBtnRef} auto rounded flat css={{ color: "rgb(172 170 170);", backgroundColor: "rgb(237 237 237);", marginRight: "20px"}} onClick={HighestPriceFilter}>
           Highest Price
         </Button>
         <Image src={arrowLeft} css={{cursor: 'pointer', display: hideLeftArrow ? 'none' : 'block'}}

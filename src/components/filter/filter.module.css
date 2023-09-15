@@ -13,6 +13,8 @@
   max-width: 100%;
   position: relative;
   align-items: center;
+  margin: 2% 0;
+  width: 100%;
 }
 
 /* .filterBody{
@@ -29,7 +31,7 @@
   justify-content: flex-start;
 } */
 
-.cardDivider{
+.divider{
   transform: rotateZ(90deg);
   width: 32px;
   height: 0.1px;
