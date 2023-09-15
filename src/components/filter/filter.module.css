@@ -37,12 +37,6 @@
   height: 0.1px;
 }
 
-.cardButton{
-  margin-right: 20px;
-  color: rgb(172 170 170);
-  background-color: rgb(237 237 237);
-}
-
 .bottomDivider{
   position: absolute;
   bottom: 10px;
