@@ -75,7 +75,7 @@ const Filter: FC<FilterProps> = ({handlePage, handleHideRightArrow, handleHideLe
     <>
       <div className={styles.filter}>
         <Text weight='medium' color='gray'>{actualProducts} of {maxProducts} products</Text>
-        <Card.Divider css={{transform: "rotateZ(90deg);", width: "32px;", height: "0.1px;"}}/>
+        <Card.Divider className={styles.divider} css={{transform: "rotateZ(90deg);", width: "32px;", height: "0.1px;", }}/>
         <Text weight='medium' color='rgb(172 170 170)' style={{marginRight: '20px'}}>Sort by:</Text>
         <Button auto rounded flat css={{ color: "rgb(172 170 170);", backgroundColor: "rgb(237 237 237);", marginRight: "20px"}}>
           Most Recent
@@ -90,9 +90,12 @@ const Filter: FC<FilterProps> = ({handlePage, handleHideRightArrow, handleHideLe
                   containerCss={{
                     width: '40px',
                     margin: 0,
-                    bottom: '135px',
+                    position: 'absolute',
+                    right: '20%',
                     '@sm': {
-                      bottom: 'unset'
+                      bottom: 'unset',
+                      position: 'relative',
+                      right: '0'
                     }
                   }}
                   onClick={() => {handlePage(false);}}
@@ -101,9 +104,12 @@ const Filter: FC<FilterProps> = ({handlePage, handleHideRightArrow, handleHideLe
                 containerCss={{
                   width: '40px',
                   margin: 0,
-                  bottom: '135px',
+                  position: 'absolute',
+                  right: '20%',
                   '@sm' : {
-                    bottom: 'unset'
+                    bottom: 'unset',
+                    position: 'relative',
+                    right: '0'
                   }
                 }}
                 onClick={() => {handlePage(true);}}
